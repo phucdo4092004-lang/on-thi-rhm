@@ -8,8 +8,7 @@
   
   <style>
     :root {
-      --primary: #00f2fe;
-      --primary-gradient: linear-gradient(90deg, #00f2fe, #4facfe);
+      --primary: #00f2fe; --primary-gradient: linear-gradient(90deg, #00f2fe, #4facfe);
       --bg-theme: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
     }
 
@@ -32,7 +31,6 @@
     }
 
     body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-main); margin: 0; padding: 0; overflow: hidden; height: 100vh; width: 100vw; background: #000; transition: color 0.3s ease; }
-
     #universe { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; background: var(--bg-theme); transition: filter 1s ease, background 1.5s ease; background-size: cover; background-position: center; }
     #universe::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.3); opacity: 0; transition: opacity 0.5s; pointer-events: none; }
     [data-theme="light"] #universe::after { opacity: 1; }
@@ -48,36 +46,45 @@
 
     .sticky-header { position: absolute; top: 0; left: 0; width: 100%; box-sizing: border-box; background: linear-gradient(to bottom, var(--overlay-bg), transparent); padding: 15px 20px; z-index: 1000; display: flex; flex-direction: column; gap: 12px; }
     .header-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-    .header-top h1 { margin: 0; font-size: 20px; font-weight: 900; color: var(--text-main); text-shadow: 0 0 10px var(--primary); letter-spacing: 1px; }
+    .header-top h1 { margin: 0; font-size: 20px; font-weight: 900; color: var(--text-main); text-shadow: 0 0 10px var(--primary); letter-spacing: 1px; display: flex; align-items: center; gap: 15px;}
+    .back-btn-top { background: var(--option-bg); color: var(--primary); border: 1px solid var(--primary); padding: 5px 12px; border-radius: 15px; font-size: 12px; text-decoration: none; font-weight: bold; transition: 0.2s;}
+    .back-btn-top:hover { background: var(--primary); color: #000; }
     
     .header-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
     .theme-selector { background: var(--option-bg); border: 1px solid var(--primary); color: var(--text-main); font-family: inherit; font-weight: 700; font-size: 13px; padding: 8px 15px; border-radius: 20px; cursor: pointer; outline: none; transition: 0.3s; }
     .theme-selector:hover { background: var(--primary); color: #000; }
     .theme-selector option { background: var(--bg-card); color: var(--text-main); }
-    .btn-action { background: var(--primary-gradient); border: none; color: #000; font-weight: 900; font-size: 13px; padding: 8px 15px; border-radius: 20px; cursor: pointer; box-shadow: 0 0 10px var(--primary); transition: 0.2s; text-transform: uppercase; display: flex; align-items: center; justify-content: center;}
+    .btn-action { background: var(--primary-gradient); border: none; color: #000; font-weight: 900; font-size: 13px; padding: 8px 15px; border-radius: 20px; cursor: pointer; box-shadow: 0 0 10px var(--primary); transition: 0.2s; text-transform: uppercase;}
     .btn-action:hover { transform: scale(1.05); filter: brightness(1.2); }
     .mode-toggle { background: var(--option-bg); border: 1px solid var(--primary); font-size: 16px; padding: 6px 12px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
-    .mode-toggle:hover { background: var(--primary); transform: scale(1.1); }
-
+    
     .stats { display: flex; gap: 10px; font-weight: 800; font-size: 13px; align-items: center;}
     .stat-item { background: var(--option-bg); padding: 6px 12px; border-radius: 15px; border: 1px solid var(--option-border); color: var(--text-main); }
     #timer-text { color: #facc15; border-color: #facc15; }
     .progress-container { width: 100%; background-color: rgba(255,255,255,0.2); border-radius: 10px; height: 5px; overflow: hidden; }
     .progress-bar { height: 100%; background: var(--primary-gradient); width: 0%; transition: width 0.3s; }
 
+    /* NÚT DONATE HUYỀN THOẠI TRONG PHÒNG THI */
+    .donate-badge { position: fixed; bottom: 20px; left: 20px; background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid #ff00de; color: var(--text-main); padding: 12px 18px; border-radius: 15px; font-size: 13px; font-weight: 700; z-index: 1000; box-shadow: 0 5px 15px rgba(255,0,222,0.2); transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 8px;}
+    .donate-badge b { color: #ff00de; font-size: 15px; font-weight: 900; letter-spacing: 0.5px;}
+    .donate-badge:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255,0,222,0.5); }
+    
+    @media (max-width: 768px) { 
+      .nav-arrow { top: auto; bottom: 30px; transform: none; width: 45px; height: 45px; } #nav-prev { left: 15px; } #nav-next { right: 15px; }
+      .donate-badge { bottom: 85px; left: 50%; transform: translateX(-50%); font-size: 11px; padding: 10px; width: max-content;}
+      .donate-badge b { font-size: 12px; } .donate-badge:hover { transform: translateX(-50%) translateY(-3px); }
+    }
+
     #question-map-drawer { position: fixed; top: 0; right: -400px; width: 340px; max-width: 90vw; height: 100vh; background: var(--drawer-bg); backdrop-filter: blur(20px); border-left: 2px solid var(--primary); box-shadow: -10px 0 40px rgba(0,0,0,0.5); z-index: 9999; transition: right 0.4s ease; display: flex; flex-direction: column; }
     #question-map-drawer.open { right: 0; }
     .drawer-header { padding: 20px; border-bottom: 1px solid var(--option-border); display: flex; justify-content: space-between; align-items: center; }
     .drawer-header h2 { margin: 0; font-size: 18px; color: var(--primary); font-weight: 900; text-transform: uppercase; }
     .close-drawer-btn { background: transparent; border: none; color: #ef4444; font-size: 28px; font-weight: 900; cursor: pointer; transition: 0.2s; }
-    .map-legend { display: flex; justify-content: center; gap: 15px; padding: 15px; background: var(--option-bg); border-bottom: 1px solid var(--option-border); font-size: 12px; font-weight: 700; color: var(--text-main);}
-    .legend-item { display: flex; align-items: center; gap: 5px; } .dot { width: 10px; height: 10px; border-radius: 50%; }
     .map-grid-container { flex: 1; overflow-y: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 10px; align-content: start; }
     .node { width: 100%; aspect-ratio: 1; border-radius: 12px; background: var(--option-bg); border: 2px solid var(--option-border); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 800; font-size: 13px; cursor: pointer; transition: 0.2s; }
     .node-correct { background: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-border); }
     .node-wrong { background: var(--wrong-bg); border-color: var(--wrong-border); color: var(--wrong-border); }
-    .node-active { border-color: var(--primary) !important; background: var(--primary) !important; color: #000; transform: scale(1.15); box-shadow: 0 0 15px var(--primary) !important; animation: pulseNode 1s infinite alternate; z-index: 10; }
-    @keyframes pulseNode { to { box-shadow: 0 0 5px var(--primary); transform: scale(1.05); } }
+    .node-active { border-color: var(--primary) !important; background: var(--primary) !important; color: #000; transform: scale(1.15); box-shadow: 0 0 15px var(--primary) !important; z-index: 10; }
 
     #review-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--drawer-bg); z-index: 10000; display: none; flex-direction: column; backdrop-filter: blur(20px); }
     .review-header { padding: 20px; border-bottom: 2px solid var(--primary); display: flex; justify-content: space-between; align-items: center; background: var(--option-bg); }
@@ -85,8 +92,6 @@
     .review-content { flex: 1; overflow-y: auto; padding: 30px; max-width: 900px; margin: 0 auto; width: 100%; box-sizing: border-box; }
     .review-item { background: var(--bg-card); border: 1px solid var(--card-border); padding: 25px; border-radius: 20px; margin-bottom: 25px; position: relative; }
     .review-q-title { font-size: 18px; font-weight: 800; line-height: 1.5; margin-bottom: 15px; color: var(--text-main); }
-    .review-status-badge { position: absolute; top: -12px; right: 20px; padding: 5px 15px; border-radius: 15px; font-size: 12px; font-weight: 900; text-transform: uppercase; }
-    .badge-correct { background: #10b981; color: #fff; } .badge-wrong { background: #ef4444; color: #fff; } .badge-unanswered { background: #64748b; color: #fff; }
     .review-opt { padding: 12px 15px; margin-bottom: 10px; border-radius: 12px; border: 1px solid var(--option-border); background: var(--option-bg); font-weight: 600; font-size: 15px; color: var(--text-main);}
     .review-opt.is-correct { background: var(--correct-bg); border-color: var(--correct-border); color: var(--correct-text); box-shadow: inset 0 0 10px rgba(16,185,129,0.2); }
     .review-opt.is-wrong { background: var(--wrong-bg); border-color: var(--wrong-border); color: var(--wrong-text); text-decoration: line-through; }
@@ -108,22 +113,10 @@
     .nav-arrow:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); transform: translateY(-50%) scale(1.1); }
     #nav-prev { left: 20px; } #nav-next { right: 20px; }
 
-    .donate-badge { position: fixed; bottom: 20px; left: 20px; background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--primary); color: var(--text-main); padding: 12px 18px; border-radius: 15px; font-size: 13px; font-weight: 700; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s; cursor: pointer; display: flex; align-items: center; gap: 8px;}
-    .donate-badge b { color: var(--primary); font-size: 15px; font-weight: 900; letter-spacing: 0.5px;}
-    .donate-badge:hover { transform: translateY(-3px); box-shadow: 0 10px 25px var(--primary); }
-    @media (max-width: 768px) { 
-      .nav-arrow { top: auto; bottom: 30px; transform: none; width: 45px; height: 45px; } #nav-prev { left: 15px; } #nav-next { right: 15px; }
-      .donate-badge { bottom: 85px; left: 50%; transform: translateX(-50%); font-size: 11px; padding: 10px; width: max-content;}
-      .donate-badge b { font-size: 12px; } .donate-badge:hover { transform: translateX(-50%) translateY(-3px); }
-    }
-
     .jump-loader-container { display: none; margin-top: 25px; text-align: center; }
     .jump-text { font-size: 12px; font-weight: 800; color: var(--text-sub); text-transform: uppercase; margin-bottom: 8px; }
     .jump-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
     .jump-bar-fill { height: 100%; background: var(--primary-gradient); width: 100%; }
-    .action-buttons { display: none; margin-top: 20px; }
-    .gemini-btn { width: 100%; padding: 14px 20px; font-size: 15px; font-weight: 900; color: #000; background: var(--primary-gradient); border: none; border-radius: 15px; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-    .gemini-btn:hover { filter: brightness(1.2); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
     #builder-widget { position: fixed; bottom: 20px; right: 20px; background: var(--bg-card); backdrop-filter: blur(10px); border: 2px solid var(--primary); border-radius: 20px; padding: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 1000; text-align: center; width: 130px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; transition: 0.3s; }
     .widget-title { font-size: 11px; font-weight: 900; color: var(--primary); text-transform: uppercase; }
@@ -137,30 +130,10 @@
     #hp-3d-4 { width: 15px; height: 25px; background: var(--primary); top: 25px; left: 15px; transform: rotateX(-90deg) translateZ(16px); }
     #hp-3d-6 { width: 50px; height: 35px; background: #475569; top: 10px; left: 10px; transform: translateZ(30px) rotateY(-45deg); }
     #hp-3d-7 { width: 50px; height: 35px; background: #64748b; top: 10px; left: 30px; transform: translateZ(30px) rotateY(45deg); }
-    #hp-3d-10 { width: 40px; height: 12px; background: var(--primary); top: 15px; left: 20px; transform: rotateX(-90deg) translateZ(20px); border-radius: 3px; color: #000; font-size: 6px; font-weight: 900; display: flex; align-items: center; justify-content: center; }
-    @media (max-width: 768px) { #builder-widget { opacity: 0.3; transform: scale(0.7); transform-origin: bottom right; } #builder-widget:hover { opacity: 1; } }
-
-    #end-screen { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; display: none; z-index: 5000; width: 90%; max-width: 550px; background: var(--drawer-bg); padding: 40px 30px; border-radius: 30px; border: 2px solid var(--primary); box-shadow: 0 0 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
-    .end-title { font-size: 26px; font-weight: 900; color: var(--text-main); margin-bottom: 10px; }
-    .end-score { font-size: 55px; font-weight: 900; color: var(--primary); margin-bottom: 15px; text-shadow: 0 0 20px var(--primary); }
-    .donate-end { margin-top: 15px; margin-bottom: 25px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px dashed var(--primary); font-size: 14px; color: var(--text-main); line-height: 1.6;}
-    .donate-end .stk { display: block; color: var(--primary); font-size: 20px; font-weight: 900; letter-spacing: 1px; margin-top: 5px; cursor: pointer; transition: 0.2s;}
-    .donate-end .stk:hover { transform: scale(1.05); text-shadow: 0 0 10px var(--primary); }
-    .retry-btn { padding: 18px 40px; font-size: 16px; font-weight: 900; color: #000; background: var(--primary-gradient); border: none; border-radius: 50px; cursor: pointer; text-transform: uppercase; box-shadow: 0 5px 20px var(--primary); }
 
     .particle { position: fixed; width: 8px; height: 8px; border-radius: 50%; pointer-events: none; z-index: 9999; animation: explode 0.6s ease-out forwards; }
     @keyframes explode { 0% { transform: translate(0, 0) scale(1); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; } }
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25%, 75% { transform: translateX(-5px); } 50% { transform: translateX(5px); } }
-    @keyframes gradientMove { 100% { background-position: 200% center; } }
-    @keyframes bounceIn { 100% { transform: translateY(-5px); } }
-    .toast-msg { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--primary); color: #000; padding: 15px 30px; border-radius: 30px; font-weight: 900; z-index: 99999; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: fadeInUp 0.3s ease, fadeOutDown 0.3s ease 3s forwards; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translate(-50%, 15px); } to { opacity: 1; transform: translate(-50%, 0); } }
-    @keyframes fadeOutDown { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, 15px); } }
-    
-    .milestone-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); background: var(--overlay-bg); padding: 40px; border-radius: 30px; border: 3px solid var(--primary); box-shadow: 0 0 50px var(--primary); z-index: 10000; text-align: center; color: var(--text-main); animation: popInCenter 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-    .milestone-popup h1 { font-size: 50px; margin: 0 0 10px 0; }
-    .milestone-popup p { font-size: 20px; font-weight: 800; color: var(--primary); margin: 0; text-transform: uppercase;}
-    @keyframes popInCenter { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 10% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 20% { transform: translate(-50%, -50%) scale(1); } 80% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(0); opacity: 0; } }
   </style>
 </head>
 <body>
@@ -168,8 +141,8 @@
   <div id="universe"></div>
   <div id="floating-objects"></div>
 
-  <div class="donate-badge" onclick="copySTK()" title="Bấm để copy STK" style="display: none;" id="donate-badge">
-    💖 Donate Phúc Đẹp Trai đi: <b>BIDV 8812766209</b>
+  <div class="donate-badge" onclick="copySTK()" id="donate-badge" style="display: none;">
+    💖 Donate cho Phúc đi: <b>BIDV 8812766209</b> (Đỗ Hồng Phúc)
   </div>
 
   <div id="nav-prev" class="nav-arrow" onclick="manualJump('prev')" style="display:none;">&lt;</div>
@@ -183,7 +156,10 @@
   <div id="main-app" style="display: none;">
     <div class="sticky-header">
       <div class="header-top">
-        <h1 id="app-title">BỘ ĐỀ RHM</h1>
+        <h1 id="app-title">
+          <a href="index.html" class="back-btn-top">⬅ THOÁT</a>
+          <span>BỘ ĐỀ RHM</span>
+        </h1>
         <div class="header-controls">
           <select class="theme-selector" id="theme-selector" onchange="changeTheme(this.value)">
             <option value="space">🌌 Vũ Trụ</option>
@@ -213,11 +189,6 @@
         <h2>Tiến Độ Bài Làm</h2>
         <button class="close-drawer-btn" onclick="toggleMapDrawer()">×</button>
       </div>
-      <div class="map-legend">
-        <div class="legend-item"><div class="dot" style="background:#10b981;"></div> Đúng</div>
-        <div class="legend-item"><div class="dot" style="background:#ef4444;"></div> Sai</div>
-        <div class="legend-item"><div class="dot" style="background:var(--option-bg);"></div> Chưa làm</div>
-      </div>
       <div class="map-grid-container" id="map-grid-container"></div>
     </div>
 
@@ -237,24 +208,8 @@
         <div id="hp-3d-1" class="house-part-3d"></div> <div id="hp-3d-2" class="house-part-3d"></div> 
         <div id="hp-3d-3" class="house-part-3d"></div> <div id="hp-3d-4" class="house-part-3d"></div> 
         <div id="hp-3d-6" class="house-part-3d"></div> <div id="hp-3d-7" class="house-part-3d"></div> 
-        <div id="hp-3d-10" class="house-part-3d">VIP</div> 
       </div>
       <div id="build-status">Chờ khởi công...</div>
-    </div>
-
-    <div id="end-screen">
-      <div class="end-title">ĐÃ HOÀN THÀNH BỘ ĐỀ!</div>
-      <div style="color: var(--text-sub); font-weight: 600; font-size: 16px; margin-bottom: 10px;">Tỷ lệ chuẩn xác</div>
-      <div class="end-score" id="final-score">100%</div>
-      
-      <div class="donate-end">
-        Nếu ứng dụng này giúp ích cho bạn trong kỳ thi CCHN 2027, hãy ủng hộ cốc cafe để Phúc Đẹp Trai có động lực làm thêm siêu phẩm nhé! ☕💖<br>
-        <span class="stk" onclick="copySTK()" title="Bấm để copy">BIDV: 8812766209 (Đỗ Hồng Phúc)</span>
-      </div>
-
-      <div id="retry-zone">
-        <button class="retry-btn" onclick="retryWrongAnswers()">🔥 LÀM LẠI CÁC CÂU SAI</button>
-      </div>
     </div>
   </div>
 
@@ -265,24 +220,20 @@
     let allQuestions = [];      
     let activeIndex = 0; 
     let answeredQuestions = 0; let correctAnswers = 0; 
-    
     let timerInterval; let timeRemaining = 90 * 60; 
     let jumpTimer = null; 
     let currentLevel5Percent = 0; 
     let currentThemeKey = 'space';
 
     function copySTK() {
-      navigator.clipboard.writeText('8812766209').then(() => {
-        const toast = document.createElement('div'); toast.className = 'toast-msg'; toast.innerHTML = '✅ Đã copy STK: 8812766209<br>Cảm ơn bạn đã Donate cho Phúc Đẹp Trai!';
-        document.body.appendChild(toast); setTimeout(() => toast.remove(), 4000);
-      });
+      navigator.clipboard.writeText('8812766209');
+      alert("Cảm ơn sếp! Đã copy STK Phúc Đẹp Trai: 8812766209");
     }
 
     function toggleLightDarkMode() {
       const html = document.documentElement;
-      const currentMode = html.getAttribute('data-theme');
       const btn = document.getElementById('mode-icon');
-      if (currentMode === 'dark') {
+      if (html.getAttribute('data-theme') === 'dark') {
         html.setAttribute('data-theme', 'light'); btn.innerText = '☀️';
       } else {
         html.setAttribute('data-theme', 'dark'); btn.innerText = '🌙';
@@ -290,79 +241,49 @@
     }
 
     const themes = {
-      space:   { bg: 'radial-gradient(circle at center, #1e1b4b 0%, #020617 100%)', primary: '#00f2fe', grad: 'linear-gradient(90deg, #00f2fe, #4facfe)', objs: ['🛸', '👽', '☄️', '🛰️', '👨‍🚀', '🌌', '🚀'] },
-      spring:  { bg: 'linear-gradient(to bottom, #2e1437, #943b54)', primary: '#ff7eb3', grad: 'linear-gradient(90deg, #ff7eb3, #ff758c)', objs: ['🦋', '🌸', '🐝', '🐞', '🌱', '🌷', '🕊️'] },
-      summer:  { bg: 'linear-gradient(to bottom, #001d3d, #00b4db)', primary: '#f6d365', grad: 'linear-gradient(90deg, #f6d365, #fda085)', objs: ['🌻', '🍉', '🍦', '🦀', '🌴', '☀️', '🏄'] },
-      autumn:  { bg: 'linear-gradient(to bottom, #3f2b96, #a8c0ff)', primary: '#ff9966', grad: 'linear-gradient(90deg, #ff9966, #ff5e62)', objs: ['🍁', '🍂', '🦊', '🐿️', '🎃', '🦉', '🌾'] },
-      winter:  { bg: 'linear-gradient(to bottom, #141e30, #243b55)', primary: '#a1c4fd', grad: 'linear-gradient(90deg, #a1c4fd, #c2e9fb)', objs: ['❄️', '⛄', '🐧', '🎿', '🧊', '🦌', '🏔️'] },
-      love:    { bg: 'linear-gradient(to bottom, #43000b, #ff0f7b)', primary: '#ff0844', grad: 'linear-gradient(90deg, #ff0844, #ffb199)', objs: ['💖', '💘', '💌', '🧸', '🌹', '🥂', '💍'] },
-      animals: { bg: 'linear-gradient(to bottom, #134e5e, #71b280)', primary: '#20b2aa', grad: 'linear-gradient(90deg, #20b2aa, #2ebf91)', objs: ['🦁', '🐯', '🐼', '🐨', '🐵', '🐘', '🦒'] },
-      nature:  { bg: 'linear-gradient(to bottom, #0f2027, #203a43)', primary: '#11998e', grad: 'linear-gradient(90deg, #11998e, #38ef7d)', objs: ['🌲', '🍄', '🏔️', '🏕️', '🦅', '🍀', '🌈'] }
+      space:   { bg: 'radial-gradient(circle at center, #1e1b4b 0%, #020617 100%)', p: '#00f2fe', obj: ['🛸', '👽', '🚀'] },
+      spring:  { bg: 'linear-gradient(to bottom, #2e1437, #943b54)', p: '#ff7eb3', obj: ['🌸', '🦋'] },
+      summer:  { bg: 'linear-gradient(to bottom, #001d3d, #00b4db)', p: '#f6d365', obj: ['🌻', '🍉'] },
+      autumn:  { bg: 'linear-gradient(to bottom, #3f2b96, #a8c0ff)', p: '#ff9966', obj: ['🍁', '🍂'] },
+      winter:  { bg: 'linear-gradient(to bottom, #141e30, #243b55)', p: '#a1c4fd', obj: ['❄️', '⛄'] },
+      love:    { bg: 'linear-gradient(to bottom, #43000b, #ff0f7b)', p: '#ff0844', obj: ['💖', '💌'] },
+      animals: { bg: 'linear-gradient(to bottom, #134e5e, #71b280)', p: '#20b2aa', obj: ['🐼', '🦁'] },
+      nature:  { bg: 'linear-gradient(to bottom, #0f2027, #203a43)', p: '#11998e', obj: ['🌲', '🍄'] }
     };
 
     function changeTheme(themeKey) {
-      currentThemeKey = themeKey;
-      const theme = themes[themeKey];
-      const root = document.documentElement;
-      root.style.setProperty('--bg-theme', theme.bg);
-      root.style.setProperty('--primary', theme.primary);
-      root.style.setProperty('--primary-gradient', theme.grad);
-      
-      document.querySelectorAll('.star').forEach(s => { s.style.backgroundColor = theme.primary; s.style.boxShadow = `0 0 5px ${theme.primary}`; });
-      document.getElementById('floating-objects').innerHTML = '';
+      currentThemeKey = themeKey; const t = themes[themeKey];
+      document.documentElement.style.setProperty('--bg-theme', t.bg);
+      document.documentElement.style.setProperty('--primary', t.p);
       document.getElementById('universe').style.filter = 'hue-rotate(0deg)';
+      document.getElementById('floating-objects').innerHTML = '';
       currentLevel5Percent = 0; 
-      
-      const percentDone = allQuestions.length === 0 ? 0 : Math.floor((answeredQuestions / allQuestions.length) * 100);
-      const levelsAchieved = Math.floor(percentDone / 5);
-      for(let i=0; i<levelsAchieved; i++) spawnThemeObject();
+      const p = allQuestions.length === 0 ? 0 : Math.floor((answeredQuestions / allQuestions.length) * 100);
+      for(let i=0; i<Math.floor(p/5); i++) spawnThemeObject();
     }
 
-    function spawnThemeObject(showPopup = false) {
-      const objs = themes[currentThemeKey].objs;
-      const randomObj = objs[Math.floor(Math.random() * objs.length)];
-      const floater = document.createElement('div');
-      floater.className = 'emoji-floater'; floater.innerText = randomObj;
-      floater.style.left = Math.random() * 90 + 'vw'; floater.style.top = Math.random() * 90 + 'vh';
-      floater.style.animationDuration = (15 + Math.random() * 15) + 's';
-      document.getElementById('floating-objects').appendChild(floater);
-
-      if (showPopup) {
-        const popup = document.createElement('div'); popup.className = 'milestone-popup';
-        popup.innerHTML = `<h1>${randomObj}</h1><p>Vượt mốc - Tặng bạn!</p>`;
-        document.body.appendChild(popup); setTimeout(() => popup.remove(), 3000);
-      }
-    }
-
-    function createStars() {
-      const uni = document.getElementById('universe'); uni.innerHTML = '';
-      for(let i=0; i<100; i++) {
-        const star = document.createElement('div'); star.className = 'star';
-        const size = Math.random() * 3 + 'px'; star.style.width = size; star.style.height = size;
-        star.style.transform = `translate(-50%, -50%) translate(${(Math.random()-0.5)*100}vw, ${(Math.random()-0.5)*100}vh)`;
-        star.style.opacity = Math.random(); uni.appendChild(star);
-      }
+    function spawnThemeObject() {
+      const t = themes[currentThemeKey]; const obj = t.obj[Math.floor(Math.random() * t.obj.length)];
+      const f = document.createElement('div'); f.className = 'emoji-floater'; f.innerText = obj;
+      f.style.left = Math.random() * 90 + 'vw'; f.style.top = Math.random() * 90 + 'vh';
+      f.style.animationDuration = (15 + Math.random() * 15) + 's';
+      document.getElementById('floating-objects').appendChild(f);
     }
 
     function startApp() {
-      createStars();
-      const splash = document.getElementById('splash-screen');
-      splash.style.opacity = '0'; 
-      setTimeout(() => { 
-        splash.style.display = 'none'; 
-        document.getElementById('main-app').style.display = 'block'; 
-        document.getElementById('donate-badge').style.display = 'flex'; 
-      }, 500);
-      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); const osc = audioCtx.createOscillator(); osc.connect(audioCtx.destination); osc.start(0); osc.stop(0.01); } catch(e) {}
+      document.getElementById('splash-screen').style.display = 'none'; 
+      document.getElementById('main-app').style.display = 'block'; 
+      document.getElementById('donate-badge').style.display = 'flex'; // HIỆN NÚT DONATE
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); const o = audioCtx.createOscillator(); o.connect(audioCtx.destination); o.start(0); o.stop(0.01); } catch(e) {}
       startTimer(); showQuestion(0); 
     }
 
     function startTimer() {
-      const timerEl = document.getElementById('timer-text');
+      const tEl = document.getElementById('timer-text');
       timerInterval = setInterval(() => {
         timeRemaining--; let m = Math.floor(timeRemaining / 60); let s = timeRemaining % 60;
-        timerEl.innerText = `⏳ ${m}:${s < 10 ? '0'+s : s}`;
-        if (timeRemaining <= 0) { clearInterval(timerInterval); timerEl.innerText = "⏳ HẾT GIỜ!"; alert("Hết thời gian làm bài!"); }
+        tEl.innerText = `⏳ ${m}:${s < 10 ? '0'+s : s}`;
+        if (timeRemaining <= 0) { clearInterval(timerInterval); alert("Hết thời gian làm bài!"); }
       }, 1000);
     }
 
@@ -370,276 +291,151 @@
       if (!audioCtx) return;
       if (audioCtx.state === 'suspended') audioCtx.resume();
       try {
-        const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-        osc.connect(gain); gain.connect(audioCtx.destination);
-        if (isCorrect) { osc.type = 'sine'; osc.frequency.setValueAtTime(880, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.1); gain.gain.setValueAtTime(0.5, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2); osc.start(audioCtx.currentTime); osc.stop(audioCtx.currentTime + 0.2);
-        } else { osc.type = 'sawtooth'; osc.frequency.setValueAtTime(200, audioCtx.currentTime); osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2); gain.gain.setValueAtTime(0.4, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2); osc.start(audioCtx.currentTime); osc.stop(audioCtx.currentTime + 0.2); }
+        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o.connect(g); g.connect(audioCtx.destination);
+        if (isCorrect) { o.type = 'sine'; o.frequency.setValueAtTime(880, audioCtx.currentTime); o.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.1); g.gain.setValueAtTime(0.5, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2); o.start(audioCtx.currentTime); o.stop(audioCtx.currentTime + 0.2);
+        } else { o.type = 'sawtooth'; o.frequency.setValueAtTime(200, audioCtx.currentTime); o.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2); g.gain.setValueAtTime(0.4, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2); o.start(audioCtx.currentTime); o.stop(audioCtx.currentTime + 0.2); }
       } catch(e) {}
     }
 
     function fireConfetti() {
-      const pColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#00f2fe';
-      const colors = [pColor, '#facc15', '#ffffff'];
+      const c = [document.documentElement.style.getPropertyValue('--primary') || '#00f2fe', '#facc15', '#ffffff'];
       for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div'); particle.className = 'particle';
-        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.left = (window.innerWidth/2) + 'px'; particle.style.top = (window.innerHeight/2) + 'px';
-        const tx = (Math.random() - 0.5) * 300; const ty = (Math.random() - 0.5) * 300;
-        particle.style.setProperty('--tx', `${tx}px`); particle.style.setProperty('--ty', `${ty}px`);
-        document.body.appendChild(particle); setTimeout(() => particle.remove(), 600);
+        const p = document.createElement('div'); p.className = 'particle';
+        p.style.backgroundColor = c[Math.floor(Math.random() * c.length)];
+        p.style.left = (window.innerWidth/2) + 'px'; p.style.top = (window.innerHeight/2) + 'px';
+        p.style.setProperty('--tx', `${(Math.random() - 0.5) * 300}px`); p.style.setProperty('--ty', `${(Math.random() - 0.5) * 300}px`);
+        document.body.appendChild(p); setTimeout(() => p.remove(), 600);
       }
     }
 
     window.onload = function() {
-      // 1. LẤY MÃ ĐỀ TỪ URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const maDe = urlParams.get('id');
+      const maDe = new URLSearchParams(window.location.search).get('id');
+      if (!maDe || typeof KHO_DE_THI === 'undefined' || !KHO_DE_THI[maDe]) { alert("Lỗi tải đề!"); window.location.href = "index.html"; return; }
+      document.getElementById('app-title').innerHTML = `<a href="index.html" class="back-btn-top">⬅ THOÁT</a> <span>${KHO_DE_THI[maDe].tenDe}</span>`;
 
-      // 2. KIỂM TRA ĐỀ CÓ TỒN TẠI TRONG KHODULIEU.JS KHÔNG
-      if (!maDe || typeof KHO_DE_THI === 'undefined' || !KHO_DE_THI[maDe]) {
-        alert("Chưa có dữ liệu đề thi này! Trở về sảnh chờ nhé.");
-        window.location.href = "Index.html";
-        return;
-      }
-
-      // 3. ĐỔI TIÊU ĐỀ
-      document.getElementById('app-title').innerText = KHO_DE_THI[maDe].tenDe;
-
-      // 4. ĐỌC DỮ LIỆU
-      const rawText = KHO_DE_THI[maDe].noiDung;
-      const lines = rawText.split('\n'); let currentQ = null; 
-
-      lines.forEach(line => {
-        line = line.trim();
-        if (!line || line.includes('EduQuiz') || line.match(/^\d+$/) || line.includes('đáp án)') || line.includes('Phần 1:') || line.includes('Phần 2:') || line === ':') return;
-        if (line.match(/^Câu\s*(hỏi)?\s*\d+:/i)) {
+      let currentQ = null; 
+      KHO_DE_THI[maDe].noiDung.split('\n').forEach(line => {
+        line = line.trim(); if (!line || line.match(/^\d+$/)) return;
+        if (line.match(/^Câu\s*\d+:/i)) {
           if (currentQ) allQuestions.push(currentQ);
-          currentQ = { title: line.replace(/^Câu\s*(hỏi)?\s*\d+:/i, '').trim(), options: [], userAnsweredCorrectly: null, userChoiceIndex: null };
+          currentQ = { title: line.replace(/^Câu\s*\d+:/i, '').trim(), options: [], ans: null, idx: null };
         } else if (line.startsWith('*')) {
-          if (currentQ) currentQ.options.push({ text: line.substring(1).trim(), isCorrect: true });
+          if (currentQ) currentQ.options.push({ text: line.substring(1).trim(), isC: true });
         } else if (line.startsWith('•')) {
-          if (currentQ) currentQ.options.push({ text: line.substring(1).trim(), isCorrect: false });
+          if (currentQ) currentQ.options.push({ text: line.substring(1).trim(), isC: false });
         } else {
-          if (currentQ && currentQ.options.length === 0) currentQ.title += "\n" + line; 
+          if (currentQ && currentQ.options.length === 0) currentQ.title += "<br>" + line; 
         }
       });
       if (currentQ) allQuestions.push(currentQ);
-      
-      buildCards(allQuestions);
-      buildStarMap(); 
-      changeTheme('space'); 
+      buildCards(); buildStarMap(); changeTheme('space'); 
     };
 
-    function updateStats() {
-      const total = allQuestions.length;
-      const percentDone = total === 0 ? 0 : Math.floor((answeredQuestions / total) * 100);
-      const scorePercent = answeredQuestions === 0 ? 0 : Math.round((correctAnswers / answeredQuestions) * 100);
-      document.getElementById('score-text').innerText = `Đúng: ${scorePercent}%`;
-      document.getElementById('progress-bar').style.width = `${percentDone}%`;
-      updateNavButtons();
-      updateHouse3D(percentDone);
-
-      let newLevel5Percent = Math.floor(percentDone / 5);
-      if (newLevel5Percent > currentLevel5Percent) {
-        currentLevel5Percent = newLevel5Percent;
-        document.getElementById('universe').style.filter = `hue-rotate(${currentLevel5Percent * 18}deg)`;
-        spawnThemeObject(true);
-      }
-    }
-
-    function buildCards(questionsArray) {
-      const container = document.getElementById('quiz-container'); container.innerHTML = ''; 
-      answeredQuestions = 0; correctAnswers = 0; activeIndex = 0;
-
-      questionsArray.forEach((q, qIndex) => {
+    function buildCards() {
+      const c = document.getElementById('quiz-container'); c.innerHTML = ''; 
+      allQuestions.forEach((q, i) => {
         if(q.options.length === 0) return;
-        const qDiv = document.createElement('div');
-        qDiv.className = 'question-box';
-        qDiv.id = 'qcard-' + qIndex;
-        
-        qDiv.innerHTML = `
-          <span class="question-number">CÂU HỎI SỐ ${qIndex + 1}</span>
-          <div class="question-title">${q.title}</div>
-          <div class="options-container"></div>
-          
-          <div class="jump-loader-container" id="loader-${qIndex}">
-            <div class="jump-text" id="jump-text-${qIndex}">Chuyển câu tự động sau: 2s</div>
-            <div class="jump-bar-bg"><div class="jump-bar-fill" id="jump-fill-${qIndex}"></div></div>
-          </div>
-          
-          <div class="action-buttons" id="actions-${qIndex}">
-            <button class="gemini-btn" id="gemini-${qIndex}">✨ HỎI GEMINI GIẢI THÍCH</button>
-          </div>
-        `;
-        
-        const optContainer = qDiv.querySelector('.options-container');
-        let correctOptText = "";
-        
-        q.options.forEach((opt, oIndex) => {
-          if (opt.isCorrect) correctOptText = opt.text;
-          const optDiv = document.createElement('div');
-          optDiv.className = 'option'; optDiv.innerText = opt.text;
-          
-          optDiv.onclick = function() {
-            if (q.userAnsweredCorrectly !== null) return; 
-            
-            Array.from(optContainer.getElementsByClassName('option')).forEach(el => el.classList.add('disabled'));
-            playSound(opt.isCorrect);
-            q.userChoiceIndex = oIndex;
-
-            if (opt.isCorrect) {
-              this.classList.add('correct'); q.userAnsweredCorrectly = true; correctAnswers++; fireConfetti();
-            } else {
-              this.classList.add('incorrect'); q.userAnsweredCorrectly = false;
-              Array.from(optContainer.getElementsByClassName('option')).forEach((el, idx) => {
-                if (q.options[idx].isCorrect) el.classList.add('correct');
-              });
-            }
-            answeredQuestions++; 
-            updateStats(); 
-            updateStarMapNode(qIndex, q.userAnsweredCorrectly);
-            handlePostAnswer(qIndex, q.title, correctOptText);
+        const div = document.createElement('div'); div.className = 'question-box'; div.id = 'qcard-' + i;
+        div.innerHTML = `<span class="question-number">CÂU SỐ ${i + 1}</span><div class="question-title">${q.title}</div><div class="options-container"></div>
+          <div class="jump-loader-container" id="loader-${i}"><div class="jump-text" id="jump-text-${i}">Chuyển câu: 2s</div><div class="jump-bar-bg"><div class="jump-bar-fill" id="jump-fill-${i}"></div></div></div>`;
+        const optC = div.querySelector('.options-container');
+        q.options.forEach((opt, oIdx) => {
+          const oDiv = document.createElement('div'); oDiv.className = 'option'; oDiv.innerHTML = opt.text; // Dùng innerHTML để hiện ảnh nếu có trong đáp án
+          oDiv.onclick = function() {
+            if (q.ans !== null) return; 
+            Array.from(optC.children).forEach(el => el.classList.add('disabled')); playSound(opt.isC); q.idx = oIdx;
+            if (opt.isC) { this.classList.add('correct'); q.ans = true; correctAnswers++; fireConfetti(); } 
+            else { this.classList.add('incorrect'); q.ans = false; Array.from(optC.children).forEach((el, x) => { if(q.options[x].isC) el.classList.add('correct'); }); }
+            answeredQuestions++; updateStats(); updateStarMapNode(i, q.ans); handlePostAnswer(i);
           };
-          optContainer.appendChild(optDiv);
+          optC.appendChild(oDiv);
         });
-        container.appendChild(qDiv);
+        c.appendChild(div);
       });
       updateStats();
     }
 
-    function handlePostAnswer(qIndex, qTitle, correctOptText) {
-      const loaderDiv = document.getElementById(`loader-${qIndex}`);
-      const jumpText = document.getElementById(`jump-text-${qIndex}`);
-      const jumpFill = document.getElementById(`jump-fill-${qIndex}`);
-      const actionDiv = document.getElementById(`actions-${qIndex}`);
-      const geminiBtn = document.getElementById(`gemini-${qIndex}`);
-
-      loaderDiv.style.display = 'block'; actionDiv.style.display = 'block';
-      let timeLeft = 2000; jumpFill.style.width = '100%';
-      
+    function handlePostAnswer(i) {
+      document.getElementById(`loader-${i}`).style.display = 'block'; 
+      let t = 2000; document.getElementById(`jump-fill-${i}`).style.width = '100%';
       jumpTimer = setInterval(() => {
-        timeLeft -= 50; jumpFill.style.width = (timeLeft / 2000) * 100 + '%';
-        jumpText.innerText = `Chuyển câu tự động sau: ${(timeLeft/1000).toFixed(1)}s`;
-        if (timeLeft <= 0) { clearInterval(jumpTimer); manualJump('next'); }
+        t -= 50; document.getElementById(`jump-fill-${i}`).style.width = (t/2000)*100 + '%';
+        document.getElementById(`jump-text-${i}`).innerText = `Chuyển câu: ${(t/1000).toFixed(1)}s`;
+        if (t <= 0) { clearInterval(jumpTimer); manualJump('next'); }
       }, 50);
-
-      geminiBtn.onclick = function() {
-        clearInterval(jumpTimer); loaderDiv.style.display = 'none';
-        geminiBtn.innerText = '✅ Đã copy prompt (Mở tab Gemini)';
-        const promptText = `Giải thích chuyên sâu Răng Hàm Mặt:\n\nCâu hỏi: ${qTitle}\n\nĐáp án đúng: ${correctOptText}\n\nTại sao đúng? Tại sao sai?`;
-        navigator.clipboard.writeText(promptText).then(() => { window.open('https://gemini.google.com/app', '_blank'); }).catch(err => alert("Lỗi copy!"));
-      };
     }
 
-    function updateNavButtons() {
+    function updateStats() {
+      const pDone = allQuestions.length === 0 ? 0 : Math.floor((answeredQuestions / allQuestions.length) * 100);
+      document.getElementById('score-text').innerText = `Đúng: ${answeredQuestions===0?0:Math.round((correctAnswers/answeredQuestions)*100)}%`;
+      document.getElementById('progress-bar').style.width = pDone + '%';
       document.getElementById('nav-prev').style.display = activeIndex > 0 ? 'flex' : 'none';
       document.getElementById('nav-next').style.display = activeIndex < allQuestions.length - 1 ? 'flex' : 'none';
+      
+      const pts = [[],['hp-3d-1'],['hp-3d-1','hp-3d-2'],['hp-3d-1','hp-3d-2','hp-3d-3'],['hp-3d-1','hp-3d-2','hp-3d-3','hp-3d-4'],['hp-3d-1','hp-3d-2','hp-3d-3','hp-3d-4','hp-3d-6'],['hp-3d-1','hp-3d-2','hp-3d-3','hp-3d-4','hp-3d-6','hp-3d-7']];
+      let lvl = pDone>0?1:0; if(pDone>=20) lvl=2; if(pDone>=40) lvl=3; if(pDone>=60) lvl=4; if(pDone>=80) lvl=5; if(pDone===100) lvl=6;
+      document.querySelectorAll('.house-part-3d').forEach(el => el.classList.remove('built'));
+      pts[lvl].forEach(id => { const x = document.getElementById(id); if(x) x.classList.add('built'); });
+      
+      let nLvl = Math.floor(pDone / 5);
+      if (nLvl > currentLevel5Percent) { currentLevel5Percent = nLvl; document.getElementById('universe').style.filter = `hue-rotate(${nLvl * 18}deg)`; spawnThemeObject(); }
     }
 
-    function manualJump(direction) {
+    function manualJump(dir) {
       if (jumpTimer) clearInterval(jumpTimer);
-      const currentCard = document.getElementById(`qcard-${activeIndex}`);
-      if(currentCard) currentCard.style.display = 'none'; 
-      
-      if (direction === 'next' && activeIndex < allQuestions.length - 1) activeIndex++;
-      else if (direction === 'prev' && activeIndex > 0) activeIndex--;
-      
+      const c = document.getElementById(`qcard-${activeIndex}`); if(c) c.style.display = 'none'; 
+      if (dir === 'next' && activeIndex < allQuestions.length - 1) activeIndex++;
+      else if (dir === 'prev' && activeIndex > 0) activeIndex--;
       showQuestion(activeIndex);
     }
 
-    function showQuestion(index) {
-      updateNavButtons();
-      const card = document.getElementById(`qcard-${index}`);
-      if(card) {
-        card.style.display = 'block'; card.classList.remove('active');
-        void card.offsetWidth; card.classList.add('active'); 
-        const loader = card.querySelector('.jump-loader-container');
-        if(loader) loader.style.display = 'none'; 
-      }
-      updateActiveMapNode();
+    function showQuestion(i) {
+      document.getElementById('nav-prev').style.display = i > 0 ? 'flex' : 'none';
+      document.getElementById('nav-next').style.display = i < allQuestions.length - 1 ? 'flex' : 'none';
+      const c = document.getElementById(`qcard-${i}`);
+      if(c) { c.style.display = 'block'; c.classList.remove('active'); void c.offsetWidth; c.classList.add('active'); const l = c.querySelector('.jump-loader-container'); if(l) l.style.display = 'none'; }
+      document.querySelectorAll('.node').forEach(n => n.classList.remove('node-active'));
+      const aN = document.getElementById(`node-${i}`); if(aN) { aN.classList.add('node-active'); aN.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
     }
 
-    function toggleMapDrawer() {
-      document.getElementById('question-map-drawer').classList.toggle('open');
-      setTimeout(updateActiveMapNode, 300);
-    }
+    function toggleMapDrawer() { document.getElementById('question-map-drawer').classList.toggle('open'); }
 
     function buildStarMap() {
-      const grid = document.getElementById('map-grid-container'); grid.innerHTML = '';
+      const g = document.getElementById('map-grid-container'); g.innerHTML = '';
       allQuestions.forEach((q, idx) => {
-        const node = document.createElement('div'); node.className = 'node'; node.id = `node-${idx}`; node.innerText = idx + 1;
-        if (q.userAnsweredCorrectly === true) node.classList.add('node-correct');
-        else if (q.userAnsweredCorrectly === false) node.classList.add('node-wrong');
-
-        node.onclick = () => {
-          document.getElementById('question-map-drawer').classList.remove('open');
-          if(idx !== activeIndex) {
-            if (jumpTimer) clearInterval(jumpTimer);
-            const currentCard = document.getElementById(`qcard-${activeIndex}`);
-            if(currentCard) currentCard.style.display = 'none'; 
-            activeIndex = idx; showQuestion(activeIndex); 
-          }
-        };
-        grid.appendChild(node);
+        const n = document.createElement('div'); n.className = 'node'; n.id = `node-${idx}`; n.innerText = idx + 1;
+        if (q.ans === true) n.classList.add('node-correct'); else if (q.ans === false) n.classList.add('node-wrong');
+        n.onclick = () => { document.getElementById('question-map-drawer').classList.remove('open'); if(idx !== activeIndex) { if (jumpTimer) clearInterval(jumpTimer); const c = document.getElementById(`qcard-${activeIndex}`); if(c) c.style.display = 'none'; activeIndex = idx; showQuestion(activeIndex); } };
+        g.appendChild(n);
       });
-      updateActiveMapNode();
+      showQuestion(0);
     }
 
-    function updateStarMapNode(index, isCorrect) {
-      const node = document.getElementById(`node-${index}`);
-      if(node) { node.classList.remove('node-correct', 'node-wrong'); node.classList.add(isCorrect ? 'node-correct' : 'node-wrong'); }
-    }
-
-    function updateActiveMapNode() {
-      document.querySelectorAll('.node').forEach(n => n.classList.remove('node-active'));
-      const activeNode = document.getElementById(`node-${activeIndex}`);
-      if(activeNode) { activeNode.classList.add('node-active'); activeNode.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    function updateStarMapNode(i, isC) {
+      const n = document.getElementById(`node-${i}`);
+      if(n) { n.classList.remove('node-correct', 'node-wrong'); n.classList.add(isC ? 'node-correct' : 'node-wrong'); }
     }
 
     function openReviewMode() {
-      if (jumpTimer) { clearInterval(jumpTimer); const loader = document.getElementById(`loader-${activeIndex}`); if(loader) loader.style.display = 'none'; }
-      const modal = document.getElementById('review-modal');
-      const content = document.getElementById('review-content');
-      content.innerHTML = '';
-
-      allQuestions.forEach((q, qIndex) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'review-item';
-        
-        let badgeHtml = '<span class="review-status-badge badge-unanswered">Chưa làm</span>';
-        if (q.userAnsweredCorrectly === true) badgeHtml = '<span class="review-status-badge badge-correct">Đúng</span>';
-        else if (q.userAnsweredCorrectly === false) badgeHtml = '<span class="review-status-badge badge-wrong">Sai</span>';
-
-        let html = `${badgeHtml}<div class="review-q-title">Câu ${qIndex + 1}: ${q.title}</div>`;
-        
-        q.options.forEach((opt, oIndex) => {
-          let optClass = 'review-opt';
-          if (opt.isCorrect) optClass += ' is-correct';
-          if (q.userChoiceIndex === oIndex && !opt.isCorrect) optClass += ' is-wrong';
-          let icon = '';
-          if (opt.isCorrect) icon = '✅ ';
-          else if (q.userChoiceIndex === oIndex) icon = '❌ ';
-          html += `<div class="${optClass}">${icon}${opt.text}</div>`;
+      if (jumpTimer) { clearInterval(jumpTimer); const l = document.getElementById(`loader-${activeIndex}`); if(l) l.style.display = 'none'; }
+      const c = document.getElementById('review-content'); c.innerHTML = '';
+      allQuestions.forEach((q, i) => {
+        const d = document.createElement('div'); d.className = 'review-item';
+        let b = '<span class="review-status-badge badge-unanswered">Chưa làm</span>';
+        if (q.ans === true) b = '<span class="review-status-badge badge-correct">Đúng</span>';
+        else if (q.ans === false) b = '<span class="review-status-badge badge-wrong">Sai</span>';
+        let h = `${b}<div class="review-q-title">Câu ${i + 1}: ${q.title}</div>`;
+        q.options.forEach((opt, oIdx) => {
+          let cl = 'review-opt'; if (opt.isC) cl += ' is-correct'; if (q.idx === oIdx && !opt.isC) cl += ' is-wrong';
+          h += `<div class="${cl}">${opt.isC ? '✅ ' : (q.idx === oIdx ? '❌ ' : '')}${opt.text}</div>`;
         });
-        
-        itemDiv.innerHTML = html; content.appendChild(itemDiv);
+        d.innerHTML = h; c.appendChild(d);
       });
-
-      modal.style.display = 'flex';
+      document.getElementById('review-modal').style.display = 'flex';
     }
 
     function closeReviewMode() { document.getElementById('review-modal').style.display = 'none'; }
-
-    function updateHouse3D(percent) {
-      const buildPhases = ["Chưa ráp", "Đế trạm", "Tường chính", "Tường hông", "Cửa gió", "Radar trái", "Radar phải", "Hoàn tất trạm 🚀"];
-      let level = 0;
-      if (percent > 0) level = 1; if (percent >= 15) level = 2; if (percent >= 30) level = 3; if (percent >= 45) level = 4;
-      if (percent >= 60) level = 5; if (percent >= 80) level = 6; if (percent === 100) level = 7;
-      const partsMap = [ [], ['hp-3d-1'], ['hp-3d-1','hp-3d-2'], ['hp-3d-1','hp-3d-2','hp-3d-3'], ['hp-3d-1','hp-3d-2','hp-3d-3','hp-3d-4'], ['hp-3d-1','hp-3d-2','hp-3d-3','hp-3d-4','hp-3d-6'], ['hp-3d-1','hp-3d-2','hp-3d-3','hp-3d-4','hp-3d-6','hp-3d-7'], ['hp-3d-1','hp-3d-2','hp-3d-3','hp-3d-4','hp-3d-6','hp-3d-7','hp-3d-10'] ];
-      document.querySelectorAll('.house-part-3d').forEach(el => el.classList.remove('built'));
-      partsMap[level].forEach(id => { const p = document.getElementById(id); if(p) p.classList.add('built'); });
-      document.getElementById('build-status').innerText = buildPhases[level];
-    }
   </script>
 </body>
 </html>
