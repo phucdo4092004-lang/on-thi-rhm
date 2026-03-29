@@ -24,7 +24,7 @@ Câu 1: Donate cho phúc chưa mà đòi :)?
 // === 2. KHU VỰC TÀI LIỆU ĐỌC ===
 const KHO_TAI_LIEU = {
   "ly_thuyet_01": {
-    tieuDe: "Cẩm nang Khớp Cắn Học",
+    tieuDe: "Phúc đẹp trai ",
     moTa: "Tóm tắt lý thuyết trọng tâm",
     noiDung: `
 CHƯƠNG 1: CƠ SỞ KHỚP CẮN HỌC
@@ -35,7 +35,7 @@ Hệ thống sẽ giữ nguyên định dạng văn bản cho bạn.
     `
   },
   "meo_thi_01": {
-    tieuDe: "Mẹo thi CCHN 2027",
+    tieuDe: "Phúc quá đẹp trai",
     moTa: "Các lưu ý khi đi thi",
     noiDung: `Dán nội dung mẹo thi vào đây...`
   }
