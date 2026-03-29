@@ -3,7 +3,7 @@ const KHO_DE_THI = {
   "khop_can_01": {
     tenDe: "Phúc có đẹp trai?",
     moTa: "130 câu hỏi luyện tập khen sự đẹp trai của phúc",
-    soCau: 130,
+    soCau: 20,
     noiDung: `
 Câu 1: Phúc có đẹp trai không?
 * Phúc quá đẹp trai
@@ -27,7 +27,7 @@ const KHO_TAI_LIEU = {
     tieuDe: "Phúc đẹp trai ",
     moTa: "Tóm tắt lý thuyết trọng tâm",
     noiDung: `
-CHƯƠNG 1: CƠ SỞ KHỚP CẮN HỌC
+CHƯƠNG 1: Phúc đẹp trai
 Nội dung tài liệu Phúc dán vào đây...
 Bạn có thể xuống dòng thoải mái.
 
