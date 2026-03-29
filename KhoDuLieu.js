@@ -1,8 +1,8 @@
 // === 1. KHU VỰC TRẮC NGHIỆM ===
 const KHO_DE_THI = {
   "khop_can_01": {
-    tenDe: "Trắc nghiệm Khớp Cắn 1",
-    moTa: "130 câu hỏi luyện tập",
+    tenDe: "Phúc đẹp trai ",
+    moTa: "130 câu hỏi luyện tập để khen phúc đẹp trai",
     soCau: 130,
     noiDung: `
 Câu 1: Phúc đẹp trai ?
