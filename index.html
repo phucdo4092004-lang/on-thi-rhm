@@ -3,95 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hệ Sinh Thái Ôn Thi RHM - Phúc VIP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <title>Hệ Sinh Thái Ôn Thi RHM 2027 - Phúc VIP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #007bff; /* Màu xanh y tế chủ đạo */
-      --secondary: #f4f7f6; /* Nền xám nhẹ dịu mắt */
-      --accent: #ff00de; /* Màu hồng nhấn mạnh */
-      --white: #ffffff;
-    }
-
-    body { font-family: 'Roboto', sans-serif; background-color: var(--secondary); margin: 0; padding: 0; }
-    header { background: var(--white); padding: 30px 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-    header h1 { margin: 0; color: var(--primary); font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
-    header p { margin: 10px 0 0; color: #6c757d; font-weight: 500; }
-
+    :root { --primary: #007bff; --accent: #ff00de; --bg: #f4f7f6; --white: #ffffff; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); margin: 0; padding: 0; color: #333; }
+    header { background: var(--white); padding: 40px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    header h1 { margin: 0; color: var(--primary); font-size: 32px; font-weight: 900; }
     main { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-    h2 { font-size: 20px; font-weight: 800; border-left: 5px solid var(--accent); padding-left: 15px; margin-bottom: 25px; color: #333; }
-
+    h2 { border-left: 6px solid var(--accent); padding-left: 15px; font-size: 22px; margin-bottom: 25px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px; }
-    .card { background: var(--white); border-radius: 20px; padding: 25px; border: 1px solid #e1e4e8; transition: 0.3s; cursor: pointer; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,123,255,0.15); border-color: var(--primary); }
+    .card { background: var(--white); border-radius: 24px; padding: 25px; border: 1px solid #e1e4e8; transition: 0.3s; cursor: pointer; position: relative; }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,123,255,0.15); border-color: var(--primary); }
+    .btn { width: 100%; border: none; padding: 14px; border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; margin-top: 15px; }
+    .btn-quiz { background: var(--primary); color: #fff; }
+    .btn-read { background: var(--accent); color: #fff; }
     
-    .badge { position: absolute; top: 15px; right: 15px; font-size: 10px; font-weight: 900; padding: 4px 10px; border-radius: 50px; text-transform: uppercase; }
-    .badge-quiz { background: #e7f3ff; color: var(--primary); }
-    .badge-read { background: #fff0fb; color: var(--accent); }
-
-    .card h3 { margin: 0 0 12px; font-size: 18px; color: #222; font-weight: 700; line-height: 1.4; }
-    .card p { margin: 0 0 20px; font-size: 14px; color: #6c757d; line-height: 1.5; }
-    
-    .btn { border: none; padding: 12px; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer; transition: 0.2s; width: 100%; text-transform: uppercase; }
-    .btn-quiz { background: var(--primary); color: white; }
-    .btn-read { background: var(--accent); color: white; }
-    .btn:hover { filter: brightness(1.1); }
-
-    footer { text-align: center; padding: 40px; color: #adb5bd; font-size: 13px; }
+    .donate-box { background: linear-gradient(135deg, #fff, #f0f7ff); border: 2px dashed var(--accent); border-radius: 20px; padding: 30px; text-align: center; margin-bottom: 50px; cursor: pointer; }
+    .donate-box h3 { margin: 0 0 10px; color: var(--accent); font-size: 20px; }
+    .stk { font-size: 24px; font-weight: 900; color: var(--primary); display: block; margin: 10px 0; }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>VŨ TRỤ CỦA ĐỖ HỒNG PHÚC</h1>
-    <p>Kho lưu trữ độc quyền của Phúc Đẹp Trai</p>
+    <h1>VŨ TRỤ CỦA PHÚC ĐẸP TRAI</h1>
+    <p>Kho tài liệu độc quyền bởi phúc đẹp trai</p>
   </header>
 
   <main>
-    <h2>🎯 DANH SÁCH ĐỀ THI TRẮC NGHIỆM</h2>
-    <div class="grid" id="container-quiz"></div>
+    <div class="donate-box" onclick="copySTK()">
+      <h3>💖 Ủng hộ Phúc Đẹp Trai</h3>
+      <p>Nếu App giúp ích cho bạn, hãy mời Phúc một ly cafe nhé!</p>
+      <span class="stk">BIDV: 8812766209</span>
+      <p><b>ĐỖ HỒNG PHÚC</b></p>
+    </div>
 
-    <h2 style="border-left-color: var(--primary)">📚 THƯ VIỆN TÀI LIỆU ĐỌC</h2>
-    <div class="grid" id="container-read"></div>
+    <h2>🎯 CHIẾN DỊCH TRẮC NGHIỆM</h2>
+    <div class="grid" id="quiz-list"></div>
+
+    <h2 style="border-color: var(--primary)">📚 THƯ VIỆN LÝ THUYẾT</h2>
+    <div class="grid" id="read-list"></div>
   </main>
-
-  <footer>
-    &copy; 2024 - Thiết kế bởi Phúc VIP - Chúc bạn vượt qua kỳ thi CCHN 2027 rực rỡ!
-  </footer>
 
   <script src="KhoDuLieu.js"></script>
   <script>
-    // Kiểm tra và hiển thị Trắc nghiệm
-    const quizDiv = document.getElementById('container-quiz');
-    if (typeof KHO_DE_THI !== 'undefined') {
-      for (const id in KHO_DE_THI) {
-        const item = KHO_DE_THI[id];
-        quizDiv.innerHTML += `
-          <div class="card" onclick="location.href='Play.html?id=${id}'">
-            <span class="badge badge-quiz">Quiz</span>
-            <h3>${item.tenDe}</h3>
-            <p>${item.moTa}</p>
-            <div style="font-weight:900; color:#28a745; margin-bottom:15px; font-size:13px;">🎯 ${item.soCau} câu hỏi</div>
-            <button class="btn btn-quiz">VÀO THI NGAY</button>
-          </div>
-        `;
-      }
+    function copySTK() {
+      navigator.clipboard.writeText('8812766209');
+      alert("Đã copy STK Phúc Đẹp Trai! Cảm ơn bạn rất nhiều.");
     }
 
-    // Kiểm tra và hiển thị Tài liệu đọc
-    const readDiv = document.getElementById('container-read');
-    if (typeof KHO_TAI_LIEU !== 'undefined') {
-      for (const id in KHO_TAI_LIEU) {
-        const item = KHO_TAI_LIEU[id];
-        readDiv.innerHTML += `
-          <div class="card" onclick="location.href='Read.html?id=${id}'">
-            <span class="badge badge-read">Reading</span>
-            <h3 style="color:var(--accent)">${item.tieuDe}</h3>
-            <p>${item.moTa}</p>
-            <button class="btn btn-read">MỞ TÀI LIỆU</button>
-          </div>
-        `;
-      }
+    const qList = document.getElementById('quiz-list');
+    for (const id in KHO_DE_THI) {
+      const item = KHO_DE_THI[id];
+      qList.innerHTML += `<div class="card" onclick="location.href='Play.html?id=${id}'">
+        <h3>${item.tenDe}</h3><p>${item.moTa}</p>
+        <div style="color: #28a745; font-weight: 800;">🎯 ${item.soCau} câu hỏi</div>
+        <button class="btn btn-quiz">VÀO THI</button>
+      </div>`;
+    }
+
+    const rList = document.getElementById('read-list');
+    for (const id in KHO_TAI_LIEU) {
+      const item = KHO_TAI_LIEU[id];
+      rList.innerHTML += `<div class="card" onclick="location.href='Read.html?id=${id}'">
+        <h3 style="color: var(--accent)">${item.tieuDe}</h3><p>${item.moTa}</p>
+        <button class="btn btn-read">MỞ ĐỌC</button>
+      </div>`;
     }
   </script>
 </body>
