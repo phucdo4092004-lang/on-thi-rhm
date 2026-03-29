@@ -9,17 +9,6 @@ Câu 1: Phúc đẹp trai ?
 * Quá đẹp trai
 • Siêu đẹp trai
     `
-  }, "khop_can_02": {
-    tenDe: "XEM BÓI FREE ",
-    moTa: "20 câu hỏi chuyên sâu để đoán trước tương lai",
-    soCau: 20,
-    noiDung: `
-      Câu 1: Đi ngủ đi
-      * Chúc ngủ ngon 
-      * Không ngủ thì thôi
-
-    `
-  }
 };
 
 // === 2. KHU VỰC TÀI LIỆU ĐỌC ===
