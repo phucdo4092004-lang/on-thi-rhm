@@ -3,71 +3,292 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thư Viện RHM - Phúc Đẹp Trai</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>Thư Viện Lý Thuyết VIP - Phúc Đẹp Trai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+  
   <style>
-    :root {
-      --primary: #00f2fe; --bg-theme: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
-      --text-main: #f8fafc; --bg-card: rgba(15, 23, 42, 0.9);
+    :root { --primary: #007bff; --accent: #ff00de; }
+    [data-theme="dark"] { --bg: #020617; --card: #0f172a; --text: #f8fafc; --text-dim: #94a3b8; --border: rgba(255,255,255,0.1); --toc-bg: rgba(30,41,59,0.8); }
+    [data-theme="light"] { --bg: #f8f9fa; --card: #ffffff; --text: #1e293b; --text-dim: #64748b; --border: rgba(0,0,0,0.1); --toc-bg: rgba(241,245,249,0.9); }
+    
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); margin: 0; line-height: 1.8; transition: 0.3s; }
+    
+    /* Thanh công cụ gắn chặt trên đầu */
+    .header { position: sticky; top:0; background: var(--card); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); z-index: 100; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid var(--border);}
+    .back-btn { background: var(--toc-bg); color: var(--primary); padding: 8px 15px; border-radius: 12px; font-weight: 800; text-decoration: none; border: 1px solid var(--primary); font-size: 13px; transition: 0.2s; }
+    .back-btn:hover { background: var(--primary); color: #fff; }
+    
+    .tools { display: flex; gap: 8px; align-items: center; flex-wrap: wrap;}
+    .tool-btn { background: var(--toc-bg); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 13px; transition: 0.2s; display: flex; align-items: center; gap: 5px; font-family: inherit;}
+    .tool-btn:hover { border-color: var(--primary); color: var(--primary); }
+    
+    /* Dropdown chọn giọng & tốc độ */
+    .voice-select { max-width: 140px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; outline: none; background: var(--toc-bg); color: var(--primary); border: 1px solid var(--primary); font-weight: 800;}
+    .speed-select { max-width: 90px; outline: none; background: var(--toc-bg); color: var(--accent); border: 1px solid var(--accent); font-weight: 900;}
+
+    .btn-tts { background: #10b981; color: #fff; border: none; box-shadow: 0 4px 10px rgba(16,185,129,0.3); }
+    .btn-tts.playing { background: #ef4444; box-shadow: 0 4px 10px rgba(239,68,68,0.3); }
+
+    /* Bố cục chính */
+    .layout-wrapper { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: flex; gap: 30px; align-items: flex-start; }
+    
+    /* Mục lục tự động (TOC) */
+    .toc-sidebar { flex: 0 0 280px; background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 20px; position: sticky; top: 90px; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .toc-title { font-size: 14px; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; border-bottom: 2px solid var(--border); padding-bottom: 10px;}
+    .toc-link { display: block; color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 14px; padding: 8px 10px; border-radius: 8px; margin-bottom: 5px; transition: 0.2s; cursor: pointer;}
+    .toc-link:hover { background: var(--toc-bg); color: var(--primary); padding-left: 15px; }
+
+    /* Khu vực đọc */
+    .content-area { flex: 1; background: var(--card); padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border: 1px solid var(--border); min-width: 0; }
+    h1 { color: var(--primary); font-size: 32px; font-weight: 900; margin-top: 0; margin-bottom: 10px; line-height: 1.3;}
+    .doc-desc { color: var(--text-dim); font-size: 15px; font-weight: 600; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px dashed var(--border); }
+    
+    #content { font-size: 18px; line-height: 1.8; transition: font-size 0.2s ease; }
+    .doc-heading { color: var(--accent); margin-top: 40px; margin-bottom: 15px; font-weight: 800; font-size: 1.3em; border-left: 5px solid var(--accent); padding-left: 15px;}
+    
+    /* Hiệu ứng ảnh */
+    #content img { max-width: 100%; border-radius: 15px; margin: 20px 0; cursor: zoom-in; border: 1px solid var(--border); transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+    #content img:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,123,255,0.2); border-color: var(--primary);}
+
+    /* Modal Phóng to ảnh */
+    #image-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); cursor: zoom-out;}
+    #image-modal img { max-width: 95%; max-height: 95vh; border-radius: 10px; box-shadow: 0 0 50px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease; }
+    @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    /* Nút Donate */
+    .donate-badge { position: fixed; bottom: 20px; right: 20px; background: var(--card); border: 1px solid var(--accent); color: var(--text); padding: 12px 20px; border-radius: 50px; font-size: 13px; font-weight: 800; z-index: 1000; box-shadow: 0 5px 20px rgba(255,0,222,0.2); cursor: pointer; transition: 0.3s; }
+    .donate-badge b { color: var(--accent); font-size: 15px; }
+    .donate-badge:hover { transform: scale(1.05) translateY(-5px); }
+
+    /* Responsive cho điện thoại */
+    @media (max-width: 900px) {
+      .layout-wrapper { flex-direction: column; padding: 0 10px; }
+      .toc-sidebar { flex: none; width: 100%; position: static; margin-bottom: 20px; box-sizing: border-box;}
+      .content-area { padding: 20px; width: 100%; box-sizing: border-box; }
+      h1 { font-size: 24px; }
+      .donate-badge { bottom: 20px; right: 50%; transform: translateX(50%); width: max-content; font-size: 11px; padding: 10px 15px;}
+      .donate-badge:hover { transform: translateX(50%) scale(1.05); }
+      .tools { justify-content: center; }
     }
-    [data-theme="light"] { --text-main: #0f172a; --bg-card: rgba(255, 255, 255, 0.95); }
-
-    body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-main); margin: 0; padding: 0; background: #000; line-height: 1.8; }
-    #universe { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; background: var(--bg-theme); background-size: cover; }
-    
-    .reader-container { max-width: 800px; margin: 100px auto 50px; padding: 40px; background: var(--bg-card); border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; }
-    
-    .sticky-header { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.8); padding: 15px 20px; z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; border-bottom: 1px solid var(--primary); }
-    .back-btn { background: var(--primary); color: #000; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 800; cursor: pointer; text-decoration: none; font-size: 13px; }
-    
-    h1 { color: var(--primary); margin-top: 0; font-size: 28px; font-weight: 800; border-bottom: 2px dashed rgba(255,255,255,0.1); padding-bottom: 20px; }
-    #content-area { white-space: pre-wrap; font-size: 17px; text-align: justify; }
-
-    .donate-badge { position: fixed; bottom: 20px; left: 20px; background: var(--bg-card); border: 1px solid var(--primary); color: var(--text-main); padding: 10px 15px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
   </style>
 </head>
 <body>
-  <div id="universe"></div>
 
-  <div class="sticky-header">
-    <a href="Index.html" class="back-btn">⬅ TRỞ VỀ</a>
-    <div style="font-weight: 900; color: var(--primary);">PHÒNG ĐỌC CỦA PHÚC</div>
-    <button onclick="toggleMode()" style="background:none; border:1px solid var(--primary); color:var(--primary); border-radius:50%; width:35px; height:35px; cursor:pointer;">🌓</button>
+  <div class="header">
+    <a href="index.html" class="back-btn">⬅ SẢNH</a>
+    <div class="tools">
+      <select id="voice-select" class="tool-btn voice-select" title="Chọn giọng đọc"></select>
+      
+      <select id="speed-select" class="tool-btn speed-select" title="Tốc độ đọc" onchange="handleSpeedChange()">
+        <option value="0.5">🐢 0.5x</option>
+        <option value="0.75">🚶 0.75x</option>
+        <option value="1.0" selected>🏃 1.0x</option>
+        <option value="1.25">🚀 1.25x</option>
+        <option value="1.5">⚡ 1.5x</option>
+        <option value="2.0">🔥 2.0x</option>
+      </select>
+
+      <button class="tool-btn btn-tts" id="tts-btn" onclick="toggleTTS()">🔊 Nghe</button>
+      <button class="tool-btn" onclick="changeFontSize(-2)">A-</button>
+      <button class="tool-btn" onclick="changeFontSize(2)">A+</button>
+      <button class="tool-btn" onclick="toggleMode()">🌓</button>
+    </div>
   </div>
 
-  <div class="reader-container">
-    <h1 id="doc-title">Tiêu đề tài liệu</h1>
-    <div id="content-area">Đang tải nội dung...</div>
+  <div class="layout-wrapper">
+    <div class="toc-sidebar" id="toc-container">
+      <div class="toc-title">📑 MỤC LỤC BÀI ĐỌC</div>
+      <div id="toc-list"></div>
+    </div>
+
+    <div class="content-area">
+      <h1 id="title">Đang tải tài liệu...</h1>
+      <div class="doc-desc" id="desc">...</div>
+      <div id="content"></div>
+    </div>
   </div>
 
-  <div class="donate-badge" onclick="copySTK()">💖 Donate Phúc Đẹp Trai: <b>BIDV 8812766209</b></div>
+  <div id="image-modal" onclick="closeImage()">
+    <img id="zoom-img" src="" alt="Zoomed Image">
+  </div>
+
+  <div class="donate-badge" onclick="copySTK()">
+    💖 Mời cafe Phúc: <b>BIDV 8812766209</b>
+  </div>
 
   <script src="KhoDuLieu.js"></script>
   <script>
-    window.onload = function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-
-      if (!id || !KHO_TAI_LIEU[id]) {
-        alert("Không tìm thấy tài liệu!");
-        window.location.href = "Index.html";
-        return;
-      }
-
-      const doc = KHO_TAI_LIEU[id];
-      document.getElementById('doc-title').innerText = doc.tieuDe;
-      document.getElementById('content-area').innerText = doc.noiDung;
-    };
-
-    function toggleMode() {
-      const html = document.documentElement;
-      html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-    }
+    let currentFontSize = 18;
+    let synth = window.speechSynthesis;
+    let isPlaying = false;
+    let utterance = null;
+    let availableVoices = [];
 
     function copySTK() {
       navigator.clipboard.writeText('8812766209');
-      alert("Đã copy STK Phúc Đẹp Trai!");
+      alert("Đã copy STK Phúc Đẹp Trai! Cảm ơn sếp nhé!");
     }
+
+    function toggleMode() {
+      const h = document.documentElement;
+      h.setAttribute('data-theme', h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+
+    function changeFontSize(delta) {
+      currentFontSize += delta;
+      if(currentFontSize < 12) currentFontSize = 12;
+      if(currentFontSize > 30) currentFontSize = 30;
+      document.getElementById('content').style.fontSize = currentFontSize + 'px';
+    }
+
+    function closeImage() { document.getElementById('image-modal').style.display = 'none'; }
+
+    // --- HỆ THỐNG QUÉT GIỌNG ĐỌC ---
+    function populateVoiceList() {
+      availableVoices = synth.getVoices();
+      const voiceSelect = document.getElementById('voice-select');
+      voiceSelect.innerHTML = '';
+      
+      let viFound = false;
+
+      availableVoices.sort((a, b) => {
+        const isAVi = a.lang.toLowerCase().includes('vi');
+        const isBVi = b.lang.toLowerCase().includes('vi');
+        if (isAVi && !isBVi) return -1;
+        if (!isAVi && isBVi) return 1;
+        return 0;
+      });
+
+      availableVoices.forEach((voice, index) => {
+        const option = document.createElement('option');
+        let shortName = voice.name.replace('Microsoft ', '').replace('Google ', '');
+        option.textContent = `${shortName} (${voice.lang})`;
+        option.value = index;
+        
+        if (voice.lang.toLowerCase().includes('vi') && !viFound) {
+          option.selected = true;
+          viFound = true;
+        }
+        
+        voiceSelect.appendChild(option);
+      });
+
+      if (!viFound && availableVoices.length > 0) {
+        const warningOption = document.createElement('option');
+        warningOption.textContent = "⚠️ Chưa có Tiếng Việt";
+        warningOption.disabled = true;
+        voiceSelect.insertBefore(warningOption, voiceSelect.firstChild);
+      }
+    }
+
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = populateVoiceList;
+    }
+
+    // --- HÀM XỬ LÝ KHI ĐỔI TỐC ĐỘ TRỰC TIẾP ---
+    function handleSpeedChange() {
+      if (isPlaying) {
+        // Nếu đang đọc mà sếp đổi tốc độ -> Tắt đi bật lại cực nhanh để áp dụng tốc độ mới
+        toggleTTS(); 
+        setTimeout(() => { toggleTTS(); }, 200); 
+      }
+    }
+
+    // --- TÍNH NĂNG SÁCH NÓI ---
+    function toggleTTS() {
+      const btn = document.getElementById('tts-btn');
+      
+      if (isPlaying) {
+        synth.cancel(); 
+        isPlaying = false;
+        btn.innerHTML = '🔊 Nghe';
+        btn.classList.remove('playing');
+      } else {
+        let textToRead = document.getElementById('content').innerText;
+        if(!textToRead.trim()) return;
+
+        utterance = new SpeechSynthesisUtterance(textToRead);
+        utterance.lang = 'vi-VN'; 
+
+        const selectedVoiceIndex = document.getElementById('voice-select').value;
+        if (availableVoices[selectedVoiceIndex]) {
+          utterance.voice = availableVoices[selectedVoiceIndex];
+          utterance.lang = availableVoices[selectedVoiceIndex].lang; 
+        }
+
+        // Lấy tốc độ đọc từ ô chọn (Chuyển thành số thực)
+        const speedValue = parseFloat(document.getElementById('speed-select').value);
+        utterance.rate = speedValue; 
+        
+        utterance.onend = function() {
+          isPlaying = false;
+          btn.innerHTML = '🔊 Nghe';
+          btn.classList.remove('playing');
+        };
+
+        utterance.onerror = function() {
+          isPlaying = false;
+          btn.innerHTML = '🔊 Nghe';
+          btn.classList.remove('playing');
+        };
+
+        synth.speak(utterance);
+        isPlaying = true;
+        btn.innerHTML = '⏹ Dừng';
+        btn.classList.add('playing');
+      }
+    }
+
+    window.onbeforeunload = function() { if(synth) synth.cancel(); };
+
+    window.onload = function() {
+      populateVoiceList();
+
+      const id = new URLSearchParams(window.location.search).get('id');
+      
+      if(typeof KHO_TAI_LIEU === 'undefined' || !id || !KHO_TAI_LIEU[id]) {
+        document.getElementById('title').innerText = "❌ Không tìm thấy tài liệu";
+        document.getElementById('content').innerText = "File KhoDuLieu.js có thể bị lỗi cú pháp hoặc link bài đọc không chính xác.";
+        document.getElementById('toc-container').style.display = 'none';
+        return;
+      }
+
+      const item = KHO_TAI_LIEU[id];
+      document.getElementById('title').innerText = item.tieuDe;
+      document.getElementById('desc').innerText = item.moTa || "Tài liệu chuyên ngành Răng Hàm Mặt";
+
+      // MỤC LỤC TỰ ĐỘNG
+      let rawContent = item.noiDung;
+      let tocHTML = '';
+      let hCount = 0;
+
+      let processedContent = rawContent.replace(/^(CHƯƠNG|PHẦN|BÀI|[IVX]+\.)\s+.*$/gm, function(match) {
+        hCount++;
+        let hId = 'chuong-' + hCount;
+        tocHTML += `<a onclick="document.getElementById('${hId}').scrollIntoView({behavior: 'smooth', block: 'start'})" class="toc-link">🔹 ${match}</a>`;
+        return `<h2 id="${hId}" class="doc-heading">${match}</h2>`;
+      });
+
+      processedContent = processedContent.replace(/\n/g, '<br>');
+      document.getElementById('content').innerHTML = processedContent;
+
+      if(hCount > 0) {
+        document.getElementById('toc-list').innerHTML = tocHTML;
+      } else {
+        document.getElementById('toc-container').style.display = 'none';
+      }
+
+      // KÍCH HOẠT ZOOM ẢNH
+      setTimeout(() => {
+        const imgs = document.querySelectorAll('#content img');
+        imgs.forEach(img => {
+          img.onclick = function() {
+            document.getElementById('zoom-img').src = this.src;
+            document.getElementById('image-modal').style.display = 'flex';
+          };
+        });
+      }, 500);
+    };
   </script>
 </body>
 </html>
