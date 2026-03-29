@@ -24,7 +24,7 @@ Câu 1: Donate cho phúc chưa mà đòi :)?
 // === 2. KHU VỰC TÀI LIỆU ĐỌC ===
 const KHO_TAI_LIEU = {
   "ly_thuyet_01": {
-    tieuDe: "Phúc đẹp trai ",
+    tieuDe: "P",
     moTa: "Tóm tắt lý thuyết trọng tâm",
     noiDung: `
 CHƯƠNG 1: Phúc đẹp trai
@@ -35,7 +35,7 @@ Hệ thống sẽ giữ nguyên định dạng văn bản cho bạn.
     `
   },
   "meo_thi_01": {
-    tieuDe: "Phúc quá đẹp trai",
+    tieuDe: "Phúc đẹp trai vậy sao",
     moTa: "Các lưu ý khi đi thi",
     noiDung: `Dán nội dung mẹo thi vào đây...`
   }
