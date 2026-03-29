@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thư Viện RHM - Phúc Đẹp Trai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00f2fe; --bg-theme: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
+      --text-main: #f8fafc; --bg-card: rgba(15, 23, 42, 0.9);
+    }
+    [data-theme="light"] { --text-main: #0f172a; --bg-card: rgba(255, 255, 255, 0.95); }
+
+    body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-main); margin: 0; padding: 0; background: #000; line-height: 1.8; }
+    #universe { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3; background: var(--bg-theme); background-size: cover; }
+    
+    .reader-container { max-width: 800px; margin: 100px auto 50px; padding: 40px; background: var(--bg-card); border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(20px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; }
+    
+    .sticky-header { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.8); padding: 15px 20px; z-index: 1000; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; border-bottom: 1px solid var(--primary); }
+    .back-btn { background: var(--primary); color: #000; border: none; padding: 8px 20px; border-radius: 20px; font-weight: 800; cursor: pointer; text-decoration: none; font-size: 13px; }
+    
+    h1 { color: var(--primary); margin-top: 0; font-size: 28px; font-weight: 800; border-bottom: 2px dashed rgba(255,255,255,0.1); padding-bottom: 20px; }
+    #content-area { white-space: pre-wrap; font-size: 17px; text-align: justify; }
+
+    .donate-badge { position: fixed; bottom: 20px; left: 20px; background: var(--bg-card); border: 1px solid var(--primary); color: var(--text-main); padding: 10px 15px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="universe"></div>
+
+  <div class="sticky-header">
+    <a href="Index.html" class="back-btn">⬅ TRỞ VỀ</a>
+    <div style="font-weight: 900; color: var(--primary);">PHÒNG ĐỌC CỦA PHÚC</div>
+    <button onclick="toggleMode()" style="background:none; border:1px solid var(--primary); color:var(--primary); border-radius:50%; width:35px; height:35px; cursor:pointer;">🌓</button>
+  </div>
+
+  <div class="reader-container">
+    <h1 id="doc-title">Tiêu đề tài liệu</h1>
+    <div id="content-area">Đang tải nội dung...</div>
+  </div>
+
+  <div class="donate-badge" onclick="copySTK()">💖 Donate Phúc Đẹp Trai: <b>BIDV 8812766209</b></div>
+
+  <script src="KhoDuLieu.js"></script>
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+
+      if (!id || !KHO_TAI_LIEU[id]) {
+        alert("Không tìm thấy tài liệu!");
+        window.location.href = "Index.html";
+        return;
+      }
+
+      const doc = KHO_TAI_LIEU[id];
+      document.getElementById('doc-title').innerText = doc.tieuDe;
+      document.getElementById('content-area').innerText = doc.noiDung;
+    };
+
+    function toggleMode() {
+      const html = document.documentElement;
+      html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    }
+
+    function copySTK() {
+      navigator.clipboard.writeText('8812766209');
+      alert("Đã copy STK Phúc Đẹp Trai!");
+    }
+  </script>
+</body>
+</html>

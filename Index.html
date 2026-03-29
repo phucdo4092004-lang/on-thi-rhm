@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vũ Trụ RHM - Sảnh Chờ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: #fff; text-align: center; padding: 30px 20px; }
+    h1 { color: #00f2fe; text-shadow: 0 0 20px #00f2fe; font-size: 28px; text-transform: uppercase; font-weight: 900;}
+    h2 { color: #ff00de; margin-top: 50px; text-align: left; max-width: 800px; margin-left: auto; margin-right: auto; border-left: 5px solid #ff00de; padding-left: 15px;}
+    .grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 900px; margin: 20px auto; }
+    .card { background: rgba(30,41,59,0.8); border: 2px solid #00f2fe; padding: 20px; border-radius: 20px; width: 260px; text-align: left; transition: 0.3s; cursor: pointer; position: relative;}
+    .card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,242,254,0.4); border-color: #ff00de;}
+    .card h3 { color: #00f2fe; margin: 0 0 10px 0; font-size: 18px; }
+    .card p { font-size: 13px; color: #94a3b8; margin: 5px 0; }
+    .btn { display: block; text-align: center; background: linear-gradient(90deg, #00f2fe, #ff00de); color: #fff; font-weight: 900; padding: 12px; border-radius: 12px; margin-top: 15px; border: none; width: 100%; cursor: pointer;}
+    .badge-type { position: absolute; top: -10px; right: 10px; background: #ff00de; color: #fff; font-size: 10px; padding: 4px 10px; border-radius: 10px; font-weight: 900; box-shadow: 0 0 10px #ff00de;}
+  </style>
+</head>
+<body>
+  <h1>🚀 TRẠM CHỈ HUY RHM</h1>
+  
+  <h2>🎯 CHIẾN DỊCH TRẮC NGHIỆM</h2>
+  <div class="grid" id="ds-trac-nghiem"></div>
+
+  <h2>📚 THƯ VIỆN TÀI LIỆU ĐỌC</h2>
+  <div class="grid" id="ds-tai-lieu"></div>
+
+  <script src="KhoDuLieu.js"></script>
+  <script>
+    const tnContainer = document.getElementById('ds-trac-nghiem');
+    for (const id in KHO_DE_THI) {
+      const item = KHO_DE_THI[id];
+      tnContainer.innerHTML += `
+        <div class="card" onclick="location.href='Play.html?id=${id}'">
+          <span class="badge-type">THI TRẮC NGHIỆM</span>
+          <h3>${item.tenDe}</h3>
+          <p>${item.moTa}</p>
+          <p style="color:#10b981; font-weight: bold;">● ${item.soCau} câu hỏi</p>
+          <button class="btn">VÀO CHIẾN!</button>
+        </div>
+      `;
+    }
+
+    const tlContainer = document.getElementById('ds-tai-lieu');
+    for (const id in KHO_TAI_LIEU) {
+      const item = KHO_TAI_LIEU[id];
+      tlContainer.innerHTML += `
+        <div class="card" style="border-color: #10b981" onclick="location.href='Read.html?id=${id}'">
+          <span class="badge-type" style="background: #10b981; box-shadow: 0 0 10px #10b981;">TÀI LIỆU ĐỌC</span>
+          <h3 style="color: #10b981">${item.tieuDe}</h3>
+          <p>${item.moTa}</p>
+          <button class="btn" style="background: #10b981">MỞ ĐỌC</button>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
