@@ -13,10 +13,10 @@ Câu 1: Phúc đẹp trai ?
     tenDe: "XEM BÓI FREE ",
     moTa: "20 câu hỏi chuyên sâu để đoán trước tương lai",
     soCau: 20,
-    noiDung:
+    noiDung: `
       Câu 1: Đi ngủ đi
       * Chúc ngủ ngon 
-      * Không ngủ thì thôi`
+      * Không ngủ thì thôi
 
     `
   }
